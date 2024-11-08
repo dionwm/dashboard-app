@@ -14,23 +14,46 @@ import {
 } from "@chakra-ui/react";
 import { RepeatClockIcon } from "@chakra-ui/icons";
 import LoadingMessage from "../components/LoadingMessage/LoadingMessage";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const [runs, setRuns] = useState([]);
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(true);
+
+  const [runs, setRuns] = useState([]);
+
+  // pagination
+  const [page, setPage] = useState(1);
+  const [runLimit, setRunLimit] = useState(12);
+  const [runSkip, setRunSkip] = useState(0);
+  const [runTotalCount, setRunTotalCount] = useState(0);
+
+  function handlePageSelect(selectedPage) {
+    if (
+      selectedPage < 1 ||
+      selectedPage > Math.ceil(runTotalCount / runLimit)
+    ) {
+      return;
+    }
+
+    setPage(selectedPage);
+    setRunSkip(runLimit * selectedPage - runLimit);
+  }
 
   useEffect(() => {
     axios
-      .get("/api/runs")
+      .get(`/api/runs?limit=${runLimit}&skip=${runSkip}`)
       .then((response) => {
         setRuns(response.data.runs);
+        setRunTotalCount(response.data.totalCount);
         setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching runs:", error);
         setIsLoading(false);
       });
-  }, []);
+  }, [runSkip]);
 
   function getStatusColor(status) {
     switch (status) {
@@ -61,32 +84,74 @@ export default function Home() {
         {isLoading ? (
           <LoadingMessage />
         ) : (
-          <TableContainer>
-            <Table variant="simple">
-              <Thead>
-                <Tr>
-                  <Th>Name</Th>
-                  <Th>Date of Run</Th>
-                  <Th>Status</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {runs.map((run) => (
-                  <Tr
-                    key={run.id}
-                    cursor="pointer"
-                    _hover={{ background: "#EEF1F6" }}
-                  >
-                    <Td>{run.name}</Td>
-                    <Td>{new Date(run.date).toLocaleDateString()}</Td>
-                    <Td>
-                      <Box color={getStatusColor(run.status)}>{run.status}</Box>
-                    </Td>
+          <>
+            <TableContainer>
+              <Table variant="simple">
+                <Thead>
+                  <Tr>
+                    <Th>Name</Th>
+                    <Th>Date of Run</Th>
+                    <Th>Status</Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
-          </TableContainer>
+                </Thead>
+                <Tbody>
+                  {runs?.map((run) => (
+                    <Tr
+                      key={run.id}
+                      cursor="pointer"
+                      _hover={{ background: "#EEF1F6" }}
+                      onClick={() => {
+                        navigate(`/run/${run.id}`);
+                      }}
+                    >
+                      <Td>{run.name}</Td>
+                      <Td>{new Date(run.date).toLocaleDateString()}</Td>
+                      <Td>
+                        <Box color={getStatusColor(run.status)}>
+                          {run.status}
+                        </Box>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </TableContainer>
+
+            {runs?.length > 0 && (
+              <Box
+                className="list-pagination"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                padding={4}
+              >
+                <Box mx="4px" onClick={() => handlePageSelect(page - 1)}>
+                  Previous
+                </Box>
+
+                {[...new Array(Math.ceil(runTotalCount / runLimit))].map(
+                  (_, index) => {
+                    return (
+                      <Box
+                        key={index}
+                        px="6px"
+                        className={
+                          page === index + 1 ? "page selected-page" : "page"
+                        }
+                        onClick={() => handlePageSelect(index + 1)}
+                      >
+                        {index + 1}
+                      </Box>
+                    );
+                  }
+                )}
+
+                <Box mx="4px" onClick={() => handlePageSelect(page + 1)}>
+                  Next
+                </Box>
+              </Box>
+            )}
+          </>
         )}
       </Box>
     </div>
