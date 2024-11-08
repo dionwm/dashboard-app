@@ -92,7 +92,7 @@ export default function Details() {
                 </Box>
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
-                    Overview
+                    Description
                   </Heading>
                   <Text pt="2" fontSize="sm">
                     {runData.description}

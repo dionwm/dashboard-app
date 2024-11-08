@@ -29,7 +29,7 @@ export default function makeServer() {
             .toISOString();
         },
         description() {
-          return faker.lorem.sentence();
+          return faker.lorem.paragraphs();
         },
         duration() {
           return faker.number.int({ min: 5, max: 120 });
