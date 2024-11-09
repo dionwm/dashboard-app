@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Dashboard App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React-based dashboard application created with [Create React App](https://github.com/facebook/create-react-app) and styled using [Chakra UI](https://chakra-ui.com/). The dashboard features interactive components, 3D text rendered in Babylon.js, and data simulation using Faker.js and MirageJS.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+After cloning the repository, navigate to the project directory and install the required packages:
 
-### `npm start`
+`npm install`
+To start the application in development mode:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`npm start`
+Will run the app on http://localhost:3000 in your browser, with hot-reloading enabled for any code changes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+The main files and folders in this project are as follows:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`public/` Contains the HTML template and static assets.
 
-### `npm run build`
+`src/` Contains the source code for the application, including components, pages, and assets.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`components/` Reusable UI components used across the application.
+pages/: Application pages, including the dashboard list page and detailed view.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`App.js` Main application component where routes and global state providers are set up.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`index.js` Entry point for ReactDOM to render the application.
+Libraries Used
 
-### `npm run eject`
+## Core Dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+`React (v18.3.1)` JavaScript library for building user interfaces.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`React Router DOM (v6.28.0)` Provides routing and navigation in the app.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`Axios (v1.7.7)` For making HTTP requests to the backend.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`@chakra-ui/react (v2.8.2)` Component library for consistent UI elements.
 
-## Learn More
+`@chakra-ui/icons (v2.1.1)` Icon components for various UI elements.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`Babylon.js` Used to create 3D text in an iframe, providing a dynamic experience in the Details page.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Data Simulation
 
-### Code Splitting
+`Faker (v6.6.6)` Used for generating fake data, making it easier to simulate real application data in development.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+`MirageJS (v0.1.48)` A mock server to simulate API requests and responses.
 
-### Analyzing the Bundle Size
+## Assisstance
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`ChatGPT` To create this README.md and everytime I got stuck with creating the 3D text using Babylon.js
