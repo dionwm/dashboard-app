@@ -123,9 +123,13 @@ export default function Home() {
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
-                padding={4}
+                padding={6}
               >
-                <Box mx="4px" onClick={() => handlePageSelect(page - 1)}>
+                <Box
+                  cursor="pointer"
+                  mx="4px"
+                  onClick={() => handlePageSelect(page - 1)}
+                >
                   Previous
                 </Box>
 
@@ -134,6 +138,7 @@ export default function Home() {
                     return (
                       <Box
                         key={index}
+                        cursor="pointer"
                         px="6px"
                         className={
                           page === index + 1 ? "page selected-page" : "page"
@@ -146,7 +151,11 @@ export default function Home() {
                   }
                 )}
 
-                <Box mx="4px" onClick={() => handlePageSelect(page + 1)}>
+                <Box
+                  cursor="pointer"
+                  mx="4px"
+                  onClick={() => handlePageSelect(page + 1)}
+                >
                   Next
                 </Box>
               </Box>

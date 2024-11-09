@@ -1,6 +1,6 @@
 // src/mirage/server.js
 import { createServer, Model, Factory } from "miragejs";
-import { faker } from "@faker-js/faker";
+import { faker, simpleFaker } from "@faker-js/faker";
 
 export default function makeServer() {
   return createServer({
@@ -10,8 +10,8 @@ export default function makeServer() {
 
     factories: {
       run: Factory.extend({
-        id(i) {
-          return i + 1;
+        id() {
+          return simpleFaker.string.uuid();
         },
         name() {
           return faker.person.fullName();
