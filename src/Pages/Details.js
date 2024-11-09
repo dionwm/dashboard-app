@@ -37,6 +37,15 @@ export default function Details() {
       });
   }, [run_id]);
 
+  useEffect(() => {
+    if (!isLoading && iframeLoaded) {
+      const iframe = document.getElementById("babylonIframe");
+      if (iframe) {
+        iframe.contentWindow.postMessage(runData.name, window.location.origin);
+      }
+    }
+  }, [isLoading, iframeLoaded]);
+
   function getStatusColor(status) {
     switch (status) {
       case "Success":
@@ -69,7 +78,7 @@ export default function Details() {
         {isLoading ? (
           <LoadingMessage />
         ) : (
-          <Card width="100%">
+          <Card width="100%" boxShadow="base">
             <Box
               className="list-title"
               py={6}

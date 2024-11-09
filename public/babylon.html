@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D Text Display</title>
+
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
   </head>
@@ -24,7 +25,9 @@
           new BABYLON.Vector3(0, 1, 0),
           scene
         );
+
         camera.attachControl(canvas, true);
+
         const light = new BABYLON.HemisphericLight(
           "light",
           new BABYLON.Vector3(1, 1, 0),
@@ -38,22 +41,25 @@
         );
         plane.position.y = 1;
 
-        const advancedTexture =
+        const ADTexture =
           BABYLON.GUI.AdvancedDynamicTexture.CreateForMesh(plane);
-        const textBlock = new BABYLON.GUI.TextBlock();
-        textBlock.text = "Loading...";
-        textBlock.color = "white";
-        textBlock.fontSize = 96;
-        advancedTexture.addControl(textBlock);
+
+        const babylonTextBlock = new BABYLON.GUI.TextBlock();
+
+        babylonTextBlock.text = "Sample Text";
+        babylonTextBlock.color = "white";
+        babylonTextBlock.fontSize = 100;
+        ADTexture.addControl(babylonTextBlock);
 
         window.changeTextColor = function (color) {
-          textBlock.color = color;
+          babylonTextBlock.color = color;
         };
 
         window.addEventListener("message", (event) => {
           if (event.origin === window.location.origin) {
             const runName = event.data;
-            textBlock.text = runName;
+            babylonTextBlock.text = runName;
+            console.log(event.data, "event");
           }
         });
 
